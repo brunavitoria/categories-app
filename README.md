@@ -17,6 +17,7 @@ Este projeto tem como objetivo oferecer uma solução eficiente para a gestão d
 - **Laravel 11:** Framework PHP para desenvolvimento web.
 - **MySQL 8:** Sistema de gerenciamento de banco de dados relacional.
 - **Laravel Sail:** Ambiente de desenvolvimento Dockerizado para aplicações Laravel.
+- **Laravel Sanctum:** Pacote de autenticação para APIs SPA (Single Page Application).
 
 ## Requisitos
 
@@ -36,11 +37,11 @@ Este projeto tem como objetivo oferecer uma solução eficiente para a gestão d
     Copie o arquivo .env.example para .env e ajuste as variáveis conforme necessário:
     ```bash
     DB_CONNECTION=mysql
-    DB_HOST=db
+    DB_HOST=mysql
     DB_PORT=3306
     DB_DATABASE=categories_db
-    DB_USERNAME=root
-    DB_PASSWORD=secret
+    DB_USERNAME=sail
+    DB_PASSWORD=password
     ```
 
 3. **Construir e Iniciar os Containers**
@@ -61,6 +62,38 @@ Este projeto tem como objetivo oferecer uma solução eficiente para a gestão d
 
 ## Uso da API
 
+**Endpoints Disponíveis**
+
+Todos os endpoints da API estão disponíveis no prefixo `/api` e requerem autenticação. Para obter um token de autenticação, é necessário criar um usuário e realizar a autenticação. A seguir, estão listados os endpoints disponíveis:
+
+- **Criar Categoria**
+    - `POST /api/categories`
+
+- **Listar Categorias**
+    - `GET /api/categories`
+
+- **Visualizar Categoria**
+    - `GET /api/categories/{id}`
+
+- **Excluir Categoria**
+    - `DELETE /api/categories/{id}`
+
+- **Criar Subcategoria**
+    - `POST /api/categories/{id}/subcategories`
+
+- **Listar Subcategorias**
+    - `GET /api/categories/{id}/subcategories`
+
+- **Visualizar Subcategoria**
+    - `GET /api/categories/{id}/subcategories/{subId}`
+
+- **Excluir Subcategoria**
+    - `DELETE /api/categories/{id}/subcategories/{subId}`
+
+## Autenticação
+
+A aplicação utiliza o Laravel Sanctum para autenticação de usuários. Para obter um token de autenticação, é necessário criar um usuário e realizar a autenticação.
+
 ## Testes
 
 Para executar os testes automatizados, utilize o comando abaixo:
@@ -69,6 +102,9 @@ Para executar os testes automatizados, utilize o comando abaixo:
 ```
 
 ## Documentação
+
+<!-- A documentação da API foi gerada utilizando o Postman e está disponível no link abaixo:
+- [Documentação da API](https://documenter.getpostman.com/view/16907391/UUy3Aq6T) -->
 
 ## Autora
 
