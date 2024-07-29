@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
@@ -20,22 +21,26 @@ class SubcategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $category)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|integer|exists:categories,id',
             'description' => 'nullable|string|max:255',
         ]);
 
+        $category = Category::where('id', $category)->first();
+        if (!$category) {
+            return response()->json(['message' => 'Category not found'], 404);
+        }
+
         $subcategory = new Subcategory();
         $subcategory->name = $request->name;
-        $subcategory->category_id = $request->category_id;
         $subcategory->description = $request->description;
+        $subcategory->category_id = $category->id;
 
         if ($subcategory->save()) {
             return response()->json([
-                'message' => 'Subcategory created',
+                'message' => 'Subcategory created successfully',
             ], 201);
         }
 
@@ -46,62 +51,74 @@ class SubcategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $category, string $id)
     {
-        if (Subcategory::where('id', $id)->exists()) {
-            $subcategory = Subcategory::find($id);
-            return response()->json($subcategory);
+        $category = Category::where('id', $category)->first();
+        if (!$category) {
+            return response()->json(['message' => 'Category not found'], 404);
         }
 
-        return response()->json([
-            'message' => 'Subcategory not found'
-        ], 404);
+        $subcategory = Subcategory::where('id', $id)->where('category_id', $category->id)->first();
+        if (!$subcategory) {
+            return response()->json(['message' => 'Subcategory not found'], 404);
+        }
+
+        return response()->json($subcategory);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $category, string $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|integer|exists:categories,id',
             'description' => 'nullable|string|max:255',
         ]);
 
-        if (Subcategory::where('id', $id)->exists()) {
-            $subcategory = Subcategory::find($id);
-            $subcategory->name = $request->name;
-            $subcategory->category_id = $request->category_id;
-            $subcategory->description = $request->description;
-            if ($subcategory->save()) {
-                return response()->json([
-                    'message' => 'Subcategory updated',
-                ], 200);
-            }
-
-            return response()->json(['message' => 'Subcategory not updated'], 500);
+        $category = Category::where('id', $category)->first();
+        if (!$category) {
+            return response()->json(['message' => 'Category not found'], 404);
         }
 
-        return response()->json(['message' => 'Subcategory not found'], 404);
+        $subcategory = Subcategory::where('id', $id)->where('category_id', $category->id)->first();
+        if (!$subcategory) {
+            return response()->json(['message' => 'Subcategory not found'], 404);
+        }
+
+        $subcategory->name = $request->name;
+        $subcategory->description = $request->description;
+
+        if ($subcategory->save()) {
+            return response()->json([
+                'message' => 'Subcategory updated successfully',
+            ], 200);
+        }
+
+        return response()->json(['message' => 'Subcategory not updated'], 500);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $category, string $id)
     {
-        if (Subcategory::where('id', $id)->exists()) {
-            $subcategory = Subcategory::find($id);
-            if ($subcategory->delete()) {
-                return response()->json([
-                    'message' => 'Subcategory deleted',
-                ], 200);
-            }
-
-            return response()->json(['message' => 'Subcategory not deleted'], 500);
+        $category = Category::where('id', $category)->first();
+        if (!$category) {
+            return response()->json(['message' => 'Category not found'], 404);
         }
 
-        return response()->json(['message' => 'Subcategory not found'], 404);
+        $subcategory = Subcategory::where('id', $id)->where('category_id', $category->id)->first();
+        if (!$subcategory) {
+            return response()->json(['message' => 'Subcategory not found'], 404);
+        }
+
+        if ($subcategory->delete()) {
+            return response()->json([
+                'message' => 'Subcategory deleted successfully',
+            ], 200);
+        }
+
+        return response()->json(['message' => 'Subcategory not deleted'], 500);
     }
 }
