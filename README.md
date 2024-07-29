@@ -53,6 +53,7 @@ Este projeto tem como objetivo oferecer uma solução eficiente para a gestão d
     ```bash
     ./vendor/bin/sail composer install
     ./vendor/bin/sail artisan migrate
+    ./vendor/bin/sail artisan db:seed
     ```
 
 5. **Gerar a Chave da Aplicação**
