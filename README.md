@@ -156,11 +156,6 @@ Para executar os testes automatizados, utilize o comando abaixo:
 ./vendor/bin/sail artisan test
 ```
 
-## Documentação
-
-<!-- A documentação da API foi gerada utilizando o Postman e está disponível no link abaixo:
-- [Documentação da API](https://documenter.getpostman.com/view/16907391/UUy3Aq6T) -->
-
 ## Autora
 
 Projeto desenvolvido por Bruna Vitória - [LinkedIn](https://www.linkedin.com/in/brunavitoria/)
