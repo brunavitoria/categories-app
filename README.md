@@ -124,6 +124,31 @@ Os endpoints de subcategorias permitem a criação, listagem, visualização, at
 
 A aplicação utiliza o Laravel Sanctum para autenticação de usuários. Para obter um token de autenticação, é necessário criar um usuário e realizar a autenticação.
 
+### Registro de Usuário
+
+Para registrar um novo usuário, envie uma requisição POST para o endpoint `/api/register` com os seguintes campos:
+
+- `name`: Nome do usuário
+- `email`: E-mail do usuário
+- `password`: Senha do usuário
+
+### Login
+
+Para realizar o login, envie uma requisição POST para o endpoint `/api/login` com os seguintes campos:
+
+- `email`: E-mail do usuário
+- `password`: Senha do usuário
+
+Após a autenticação, o token de autenticação será retornado no corpo da resposta. Ele devera ser adicionado ao cabeçalho `Authorization` nas requisições que requerem autenticação.
+
+### Logout
+
+Para realizar o logout, envie uma requisição POST para o endpoint `/api/logout` com o token de autenticação no cabeçalho `Authorization`.
+
+### Usuário Autenticado
+
+Para obter os dados do usuário autenticado, envie uma requisição GET para o endpoint `/api/user` com o token de autenticação no cabeçalho `Authorization`.
+
 ## Testes
 
 Para executar os testes automatizados, utilize o comando abaixo:
