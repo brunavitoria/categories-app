@@ -14,7 +14,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResources([
         'categories' => CategoriesController::class,
-        'category/{category}/subcategories' => SubcategoriesController::class,
+        'categories/{category}/subcategories' => SubcategoriesController::class,
     ]);
     Route::get('/user', function (Request $request) {
         return $request->user();
