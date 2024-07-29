@@ -64,7 +64,27 @@ Este projeto tem como objetivo oferecer uma solução eficiente para a gestão d
 
 **Endpoints Disponíveis**
 
-Todos os endpoints da API estão disponíveis no prefixo `/api` e requerem autenticação. Para obter um token de autenticação, é necessário criar um usuário e realizar a autenticação. A seguir, estão listados os endpoints disponíveis:
+Todos os endpoints da API estão disponíveis no prefixo `/api`. A seguir, estão listados os endpoints disponíveis:
+
+### Autenticação
+
+Os endpoints de autenticação permitem o registro, login, logout e obtenção de informações do usuário autenticado.
+
+- **Registrar Usuário**
+    - `POST /api/register`
+
+- **Login**
+    - `POST /api/login`
+
+- **Logout**
+    - `POST /api/logout`
+
+- **Usuário Autenticado**
+    - `GET /api/user`
+
+### Categorias
+
+Os endpoints de categorias permitem a criação, listagem, visualização, atualização e exclusão de categorias. Requerem autenticação.
 
 - **Criar Categoria**
     - `POST /api/categories`
@@ -73,22 +93,32 @@ Todos os endpoints da API estão disponíveis no prefixo `/api` e requerem auten
     - `GET /api/categories`
 
 - **Visualizar Categoria**
-    - `GET /api/categories/{id}`
+    - `GET /api/categories/{category}`
 
 - **Excluir Categoria**
-    - `DELETE /api/categories/{id}`
+    - `DELETE /api/categories/{category}`
+
+- **Atualizar Categoria**
+    - `PUT /api/categories/{category}`
+
+### Subcategorias
+
+Os endpoints de subcategorias permitem a criação, listagem, visualização, atualização e exclusão de subcategorias. Requerem autenticação.
 
 - **Criar Subcategoria**
-    - `POST /api/categories/{id}/subcategories`
+    - `POST /api/categories/{category}/subcategories`
 
 - **Listar Subcategorias**
-    - `GET /api/categories/{id}/subcategories`
+    - `GET /api/categories/{category}/subcategories`
 
 - **Visualizar Subcategoria**
-    - `GET /api/categories/{id}/subcategories/{subId}`
+    - `GET /api/categories/{category}/subcategories/{subcategory}`
+
+- **Atualizar Subcategoria**
+    - `PUT /api/categories/{category}/subcategories/{subcategory}`
 
 - **Excluir Subcategoria**
-    - `DELETE /api/categories/{id}/subcategories/{subId}`
+    - `DELETE /api/categories/{id}/subcategories/{subcategory}`
 
 ## Autenticação
 
