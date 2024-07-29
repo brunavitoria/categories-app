@@ -14,6 +14,10 @@ class SubcategoriesSeeder extends Seeder
      */
     public function run(): void
     {
+        if (Subcategory::count() > 0) {
+            return;
+        }
+        
         $categories = Category::all()->toArray();
         
         Subcategory::insert([
